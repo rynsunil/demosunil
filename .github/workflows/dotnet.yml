@@ -23,6 +23,9 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     - name: Create the package
       run: dotnet pack --configuration Release
+    - name: Publish the package 
+      run: dotnet nuget push hello-world-api/bin/Release/*.nupkg
+    
     
     
    
