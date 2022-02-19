@@ -15,7 +15,7 @@ jobs:
   build:
      runs-on: [ self-hosted ]
 
-    steps:
+     steps:
       # Checkout the repo
       - uses: actions/checkout@main
       
