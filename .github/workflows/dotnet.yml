@@ -1,4 +1,4 @@
-name: .NET core
+name: .NET Core CI
 
 on:
   push:
@@ -6,26 +6,38 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+  AZURE_WEBAPP_NAME: arpitha    # set this to your application's name
+  AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
+  DOTNET_VERSION: '2.0.x'           # set this to the dot net version to use
+
 jobs:
   build:
-
-    runs-on: [ self-hosted ]
+     runs-on: [ self-hosted ]
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 2.0.0
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --configuration Release --no-restore
-    - name: Create the package
-      run: dotnet pack --configuration Release
-    - name: Publish the package 
-      run: dotnet nuget push /home/azureuser/actions-runner/_work/test6/test6/hello-world-api/bin/Release/hello-world-api.1.0.0.nupkg
-    
-    
+      # Checkout the repo
+      - uses: actions/checkout@main
+      
+      # Setup .NET Core SDK
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }} 
+      
+      # Run dotnet build and publish
+      - name: dotnet build and publish
+        run: |
+          dotnet restore
+          dotnet build --configuration Release
+          dotnet publish -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp' 
+          
+      # Deploy to Azure Web apps
+      - name: 'Run Azure webapp deploy action using publish profile credentials'
+        uses: azure/webapps-deploy@v2
+        with: 
+          app-name: ${{ env.AZURE_WEBAPP_NAME }} # Replace with your app name
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_SECRETE  }} # Define secret variable in repository settings as per action documentation
+          package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp'
     
    
