@@ -24,7 +24,7 @@ jobs:
     - name: Create the package
       run: dotnet pack --configuration Release
     - name: Publish the package 
-      run: dotnet nuget push ./hello-world-api/bin/Release/*.nupkg
+      run: dotnet nuget push /home/azureuser/actions-runner/_work/test6/test6/hello-world-api/bin/Release/hello-world-api.1.0.0.nupkg
     
     
     
