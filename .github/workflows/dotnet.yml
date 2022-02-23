@@ -30,7 +30,7 @@ jobs:
         run: |
           dotnet restore
           dotnet build --configuration Release
-          dotnet pack --configuration Release
+          dotnet pack --configuration Release myapp
       
     
    
