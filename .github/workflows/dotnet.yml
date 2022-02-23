@@ -23,8 +23,5 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     - name: Create the package
       run: dotnet pack --configuration Release
-    - name: Publish the package to GPR
-      run: dotnet nuget push "./bin/Release/hello-world-api.1.0.0.nupkg"  --api-key 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
-          --source "github"
-    
+  
    
