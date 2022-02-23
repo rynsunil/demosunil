@@ -29,8 +29,8 @@ jobs:
       - name: dotnet build and publish
         run: |
           dotnet restore
-          dotnet build --configuration Release
-          dotnet pack --configuration Release hello-world-api
+          dotnet build --configuration Release --no-restore
+          dotnet pack --configuration Release 
       
     
    
