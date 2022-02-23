@@ -23,5 +23,9 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     - name: Create the package
       run: dotnet pack --configuration Release
+    - name: publish
+      run: dotnet publish -c Release -o './myapp' 
+      
+      
   
    
