@@ -27,7 +27,9 @@ jobs:
       run: dotnet publish -c Release -o './myapp' 
     - name: Deploy to IIS
       run: |
-        Copy-Item ./myapp/* C:/inetpub/wwwroot/myapp -Recurse -Force
+        iisreset /stop
+        Copy-Item ./dotnetcorewebapp/* C:/inetpub/wwwroot/dotnetcore-webapp -Recurse -Force
+        iisreset /start
         
        
       
