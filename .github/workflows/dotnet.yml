@@ -30,8 +30,7 @@ jobs:
         iisreset /stop
         Copy-Item ./myapp/* C:/inetpub/wwwroot/myapp -Recurse -Force
         iisreset /start
-    - name: Curl the website as a smoke test
-      run: curl http://localhost/myapp
+    
       
   
    
