@@ -20,9 +20,6 @@ jobs:
         dotnet-version: 2.1.816
     - name: Restore dependencies
       run: dotnet restore
-    - name: add resource
-      run: dotnet nuget add source --username rynsunil --password ${{ secrets.MY_GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/OWNER/index.json" -n nuget.org
-    
     - name: Build
       run: dotnet build --configuration Release --no-restore
   
