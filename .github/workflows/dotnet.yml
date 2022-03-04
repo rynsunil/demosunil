@@ -25,12 +25,9 @@ jobs:
     - name: Create the package
       run: dotnet pack --configuration Release
     - name: publish
-      run:  dotnet publish -c Release -o .\myapp 
-    - name: Deploy to IIS
-      run: |
-        iisreset /stop
-        Copy-Item ./myapp/* C:/inetpub/wwwroot/myapp -Recurse -Force
-        iisreset /start
+      run:  dotnet nuget push "bin/Release/OctocatApp.1.0.0.nupkg"  --api-key YOUR_GITHUB_PAT --source "github"
+ 
+   
     
       
   
