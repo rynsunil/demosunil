@@ -25,7 +25,7 @@ jobs:
     - name: Create the package
       run: dotnet pack --configuration Release
     - name: publish
-      run:  dotnet nuget push "bin/Release/OctocatApp.1.0.0.nupkg"  --api-key YOUR_GITHUB_PAT --source "github"
+      run:  dotnet nuget push "bin/Release/OctocatApp.1.0.0.nupkg"  --api-key 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 --source "github"
  
    
     
