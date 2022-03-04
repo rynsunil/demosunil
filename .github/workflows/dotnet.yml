@@ -20,13 +20,17 @@ jobs:
         dotnet-version: 2.1.816
     - name: Restore dependencies
       run: dotnet restore
-    - name: Build
-      run: dotnet build --configuration Release --no-restore
-    - name: Create the package
-      run: dotnet pack --configuration Release
     - name: add resource
       run: dotnet nuget add source --username rynsunil --password ${{ secrets.MY_GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/OWNER/index.json"
-    - name: pulish
+    
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+  
+    - name: Create the package
+      run: dotnet pack --configuration Release
+   
+      
+    - name: publish
       run: dotnet nuget push "bin/Release/hello-world-api.1.0.0.nupkg"  --api-key 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 --source "github"
     
    
